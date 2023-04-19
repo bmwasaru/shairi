@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import openai
 
-openai.api_key = os.environ.get('OPEN_API_KEy')
+openai.api_key = os.environ.get('OPEN_API_KEY')
 
 response = openai.Completion.create(
   model="text-davinci-003",
