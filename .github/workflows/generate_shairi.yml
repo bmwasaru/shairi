@@ -36,7 +36,7 @@ jobs:
       - name: Run the shairi generation script
       - shell: bash
         env:
-          OPEN_API_KEY: ${{ secrets.open_api }}
+          OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
         run: |
           python shairi.py
      
