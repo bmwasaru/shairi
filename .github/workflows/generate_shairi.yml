@@ -34,6 +34,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run the shairi generation script
+      - shell: bash
         env:
           OPEN_API_KEY: ${{ secrets.open_api }}
         run: |
