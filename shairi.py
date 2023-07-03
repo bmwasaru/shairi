@@ -14,5 +14,5 @@ response = openai.Completion.create(
   presence_penalty=0
 )
 
-with open(f'mashairi/{datetime.today().strftime("%d-%m-%y")}.txt', 'w+') as file:
-    file.write(response["choices"][0]["text"].strip())
+with open(f'mashairi/{datetime.today().strftime("%d-%m-%y")}.txt', 'w+', encoding="utf-8") as file:
+    file.write(response["choices"][0]["text"])
