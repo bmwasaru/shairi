@@ -1,18 +1,16 @@
 import os
 from datetime import datetime
-import openai
+from openai import OpenAI
 
-openai.api_key = os.environ.get('OPEN_API_KEY')
+client = OpenAI(api_key=os.environ.get('OPEN_API_KEY'))
 
-response = openai.Completion.create(
-  model="text-davinci-003",
-  prompt="poem in kiswahili",
-  temperature=0.7,
-  max_tokens=256,
-  top_p=1,
-  frequency_penalty=0,
-  presence_penalty=0
+completion = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a poetic assistant."},
+    {"role": "user", "content": "Compose a poem in Kiswahili."}
+  ]
 )
 
 with open(f'mashairi/{datetime.today().strftime("%d-%m-%y")}.txt', 'w+', encoding="utf-8") as file:
-    file.write(response["choices"][0]["text"].strip())
+    file.write(completion.choices[0].message.content)
