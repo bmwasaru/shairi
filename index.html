@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shairi Bandia</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            axios.get('https://bmwasaru.github.io/shairi/mashairi/01-02-24.txt')
+                .then(response => {
+                    const shairi = response.data;
+                    document.getElementById('shairi').textContent = shairi;
+                })
+                .catch(error => console.error('Error loading the shairi.', error));
+        });
+    </script>
+</head>
+<body>
+    <h1>Shairi Bandia</h1>
+    <p id="shairi">Loading...</p>
+</body>
+</html>
