@@ -5,14 +5,6 @@
     <title>Shairi Bandia</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            axios.get('https://bmwasaru.github.io/shairi/mashairi/01-02-24.txt')
-                .then(response => {
-                    const shairi = response.data;
-                    document.getElementById('shairi').textContent = shairi;
-                })
-                .catch(error => console.error('Error loading the shairi.', error));
-        });
 
         async function listFilesInRepo(owner, repo, path) {
             const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
@@ -26,7 +18,14 @@
 
                 files.forEach(file => {
                     const li = document.createElement('li');
-                    li.textContent = file.name;
+                    const a = document.createElement('a');
+                    a.href = '#'; // Set a placeholder href
+                    a.textContent = file.name;
+                    a.onclick = async () => {
+                        const fileContentResponse = await axios.get(file.download_url);
+                        document.getElementById('fileContent').textContent = fileContentResponse.data;
+                    };
+                    li.appendChild(a);
                     fileList.appendChild(li);
                 });
             } catch (error) {
@@ -36,11 +35,14 @@
 
         // Example usage:
         listFilesInRepo('bmwasaru', 'shairi', 'mashairi');
+
+
     </script>
 </head>
 <body>
     <h1>Shairi Bandia</h1>
-    <p id="shairi">Loading...</p>
     <ul id="fileList"></ul>
+
+    <div id="fileContent"></div>
 </body>
 </html>
